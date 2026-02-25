@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konrad's Journey: Intercultural Logbook</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --text-main: #2d3436;
+            --text-light: #525f63;
+            --de-color: #2c3e50;
+            --tr-color: #c0392b;
+            --card-radius: 12px;
+            --card-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            padding-bottom: 100px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #222 50%, #c0392b 100%);
+            color: #fff;
+            padding: 9rem 1rem 7rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+        }
+        
+        header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 3.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        header .subtitle {
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .intro-block {
+            text-align: center;
+            margin: 3rem auto 6rem;
+            max-width: 700px;
+            color: var(--text-light);
+            font-family: 'Merriweather', serif;
+            font-size: 1.15rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 3rem;
+        }
+
+        .narrative-bridge {
+            text-align: center;
+            margin: 5rem auto;
+            padding: 2rem;
+            color: #888;
+            font-style: italic;
+            font-family: 'Merriweather', serif;
+            max-width: 600px;
+            background: #f4f4f4;
+            border-radius: 50px;
+        }
+
+        .entry {
+            background: #fff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 6rem;
+            overflow: hidden;
+            border-top: 6px solid var(--de-color);
+            transition: transform 0.3s ease;
+        }
+
+        .entry:hover { transform: translateY(-3px); }
+        .entry:nth-child(even) { border-top-color: var(--tr-color); }
+
+        .entry-header { padding: 3.5rem 3.5rem 2rem; }
+
+        .meta-tag {
+            display: inline-block;
+            background: #f1f2f6;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            color: #7f8c8d;
+            margin-bottom: 1.2rem;
+        }
+
+        .entry h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .story-content {
+            padding: 0 3.5rem 2.5rem;
+            font-family: 'Merriweather', serif;
+            font-size: 1.15rem;
+            color: #4a4a4a;
+        }
+
+        .story-content p { margin-bottom: 1.8rem; }
+        
+        .thought {
+            font-style: italic;
+            color: #7f8c8d;
+            border-left: 2px solid #ccc;
+            padding-left: 1rem;
+        }
+
+        /* --- MEDIA SHOWCASE LAYOUT (VERTIKAL GESTAPELT) --- */
+        .media-showcase {
+            display: flex;
+            flex-direction: column;    /* Alles untereinander stapeln */
+            align-items: center;       /* Horizontal zentrieren */
+            gap: 2.5rem;               /* Abstand zwischen Bild und Video */
+            padding: 4rem 3.5rem;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .media-item {
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            
+            /* Einheitliche Breite für Bilder & Videos */
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .video-box { aspect-ratio: 16/9; } 
+
+        /* CSS UPDATE: Damit das iFrame responsiv ist */
+        .media-item video, .media-item iframe {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            display: block;
+            border: none; /* Entfernt Standard-Rahmen vom iFrame */
+        }
+
+        .media-item img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        .placeholder-text {
+            color: #adb5bd; font-weight: 600; font-size: 0.9rem; text-align: center; padding: 1rem;
+            width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #e9ecef;
+        }
+
+        .analysis { padding: 3rem 3.5rem; background: #fff; }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .col h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .de h3 { color: var(--de-color); }
+        .tr h3 { color: var(--tr-color); }
+
+        .col ul { list-style: none; }
+        .col li { 
+            margin-bottom: 1rem; 
+            font-size: 0.95rem; 
+            color: var(--text-light);
+            padding-left: 1rem;
+            border-left: 2px solid #eee;
+        }
+
+        .de li { border-left-color: var(--de-color); }
+        .tr li { border-left-color: var(--tr-color); }
+
+        footer {
+            text-align: center;
+            padding: 4rem 1rem;
+            border-top: 1px solid #eee;
+            margin-top: 4rem;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .entry-header, .story-content, .media-showcase, .analysis { padding: 1.5rem; }
+            .comparison-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Konrad's Journey</h1>
+        <p class="subtitle">5 Days in Istanbul.<br>Learning to let go of the Grid.</p>
+    </header>
+
+    <main class="container">
+
+        <div class="intro-block">
+            <p>"I work, I plan, I like structure. I travel from time to time, but mostly in ways that feel familiar. I rely on schedules and reservations. This week in Turkey, however, I learned that the best things happen when you lose the plan."</p>
+        </div>
+
+        <article class="entry">
+            <div class="entry-header">
+                <span class="meta-tag">Day 1 • 17:00 • The Metro Line M2</span>
+                <h2>Talking to Strangers</h2>
+            </div>
+            
+            <div class="story-content">
+                <p>I had just landed and was dragging my suitcase onto the M2 metro line. My mind was busy calculating the route to my hotel, checking stops, ensuring I wasn't being pickpocketed. I was in my "transit bubble."</p>
+                <p>Then, the bubble popped. A man sitting next to me—mustache, leather jacket, kind eyes—tapped my shoulder. "Tourist?" he asked. I nodded politely, expecting him to sell me something. Instead, he smiled. "Welcome to Istanbul. My name is Mehmet."</p>
+                <p>In Germany, we have an invisible wall around us in public transport. Breaking it requires a valid reason—a delay, an accident, or a fire. Here, the reason was simply existence. By the time I reached my stop, Mehmet had given me his phone number and made me promise to visit his home for dinner later that week. I took the number out of politeness, never intending to use it. Or so I thought.</p>
+            </div>
+
+            <div class="media-showcase">
+                <div class="media-item pictogram-box">
+                    <img src="Bilder/openness.png" alt="Bild - Social Openness">
+                </div>
+            </div>
+
+            <div class="analysis">
+                <div class="comparison-grid">
+                    <div class="col de">
+                        <h3>🇩🇪 Germany</h3>
+                        <ul>
+                            <li>Friendship requires time & specific context (clubs, work).</li>
+                            <li>Privacy in public spaces ("Coconut Culture").</li>
+                        </ul>
+                    </div>
+                    <div class="col tr">
+                        <h3>🇹🇷 Turkey</h3>
+                        <ul>
+                            <li>High spontaneous social interaction.</li>
+                            <li>Strangers are seen as potential friends ("Peach Culture").</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <div class="narrative-bridge">
+            <p>* * *</p>
+            <p>I spent the next two days doing what Germans do best: sightseeing by the book. Hagia Sophia. Blue Mosque. Galata Tower. It was beautiful, but distant. Then, on Day 4, my phone buzzed. It was Mehmet. "Dinner tonight. My wife is cooking. No excuses." <br>My rational brain said: <em>Don't go. You don't know him.</em> <br>My gut said: <em>Go.</em></p>
+            <p>* * *</p>
+        </div>
+
+        <article class="entry">
+            <div class="entry-header">
+                <span class="meta-tag">Day 4 • 18:30 • Üsküdar Neighborhood</span>
+                <h2>More Than a Handshake</h2>
+            </div>
+            
+            <div class="story-content">
+                <p>I found the apartment in a winding street in Üsküdar. When Mehmet opened the door, my German autopilot engaged. I stood straight, made eye contact, and extended my right hand for a firm, professional handshake—the universal sign of respect in my world.</p>
+                <p>Mehmet ignored my hand completely. He stepped into my personal space, grabbed my shoulders, and pulled me into a hug, kissing both my cheeks. <em>"Hoş geldin, brother!"</em> he boomed. Inside, his cousins and nephews were waiting. The greeting ritual repeated with everyone. Touches on the shoulder, warm smiles, lingering handshakes.</p>
+                <p class="thought">I felt stiff, awkward, like a robot that hadn't been programmed for affection. In Germany, we keep distance to show respect. Here, they destroy distance to show welcome.</p>
+            </div>
+
+            <div class="media-showcase">
+                <div class="media-item pictogram-box">
+                    <img src="Bilder/physical_greetings.png" alt="Bild - Social Openness">
+                </div>
+            </div>
+
+            <div class="analysis">
+                <div class="comparison-grid">
+                    <div class="col de">
+                        <h3>🇩🇪 Germany</h3>
+                        <ul>
+                            <li>Low Contact Culture.</li>
+                            <li>Handshake maintains professional distance.</li>
+                        </ul>
+                    </div>
+                    <div class="col tr">
+                        <h3>🇹🇷 Turkey</h3>
+                        <ul>
+                            <li>High Contact Culture.</li>
+                            <li>Physical touch (hugs, kisses) signals trust.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="entry">
+            <div class="entry-header">
+                <span class="meta-tag">Day 4 • 19:30 • The Feast</span>
+                <h2>A Guest Is Never “Just” a Guest</h2>
+            </div>
+            
+            <div class="story-content">
+                <p>I expected a simple meal. What I got was a culinary assault. The table was groaning under plates of Dolma, Börek, salads, and meats. I barely knew these people, yet they treated me like a long-lost king.</p>
+                <p>Every time my plate was half-empty, Mehmet's wife refilled it. When I politely said, "No, thank you, I'm full," they laughed and put more food on my plate. I realized that in Turkey, "No" is just the start of a negotiation. To accept the food is to accept the love.</p>
+                <p>In Germany, hospitality is a contract: You invite me, I bring wine, we eat what is planned, I leave at a reasonable hour. Here, hospitality is a total surrender. I was the "Tanrı Misafiri"—the Guest of God. My comfort was their moral duty.</p>
+            </div>
+
+            <div class="media-showcase">
+                <div class="media-item pictogram-box">
+                    <img src="Bilder/hospitality.png" alt="Bild - Social Openness">
+                </div>
+            </div>
+
+            <div class="analysis">
+                <div class="comparison-grid">
+                    <div class="col de">
+                        <h3>🇩🇪 Germany</h3>
+                        <ul>
+                            <li>Reciprocity is expected.</li>
+                            <li>Visits are planned with clear time limits.</li>
+                        </ul>
+                    </div>
+                    <div class="col tr">
+                        <h3>🇹🇷 Turkey</h3>
+                        <ul>
+                            <li>"Tanrı Misafiri" (Guest of God).</li>
+                            <li>Total service without expectation of immediate return.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="entry">
+            <div class="entry-header">
+                <span class="meta-tag">Day 4 • 20:30 • The Living Room</span>
+                <h2>Family First</h2>
+            </div>
+            
+            <div class="story-content">
+                <p>The apartment was loud. Not aggressive loud, but happy loud. Cousins dropped by unannounced. Neighbors walked in to borrow sugar and stayed for tea. The concept of a "Nuclear Family"—just parents and kids behind a locked door—didn't seem to exist here.</p>
+                <p>They asked me about my family. "Where do your parents live?" Mehmet asked. <br>"In a retirement home near Munich," I said. <br>The room went silent. They looked at me with genuine confusion, bordering on pity. "Why not with you?" <br>I tried to explain our concept of independence, of not being a burden. They didn't buy it. To them, family is the safety net, the bank, and the identity. To be independent is to be alone.</p>
+            </div>
+
+            <div class="media-showcase">
+                <div class="media-item pictogram-box">
+                    <img src="Bilder/family_centrality.png" alt="Bild - Social Openness">
+                </div>
+            </div>
+
+            <div class="analysis">
+                <div class="comparison-grid">
+                    <div class="col de">
+                        <h3>🇩🇪 Germany</h3>
+                        <ul>
+                            <li>Individualism.</li>
+                            <li>Focus on the Nuclear Family.</li>
+                        </ul>
+                    </div>
+                    <div class="col tr">
+                        <h3>🇹🇷 Turkey</h3>
+                        <ul>
+                            <li>Collectivism.</li>
+                            <li>Extended Family is the primary identity.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="entry">
+            <div class="entry-header">
+                <span class="meta-tag">Day 4 • 21:00 • The Uncle Arrives</span>
+                <h2>When Age Enters the Room</h2>
+            </div>
+            
+            <div class="story-content">
+                <p>The door opened again, and an elderly man with a cane and a prayer bead (tesbih) walked in. It was Mehmet's uncle. The change in the room was instant and electric.</p>
+                <p>Every single young person stood up immediately. The loud laughter stopped. One by one, the cousins approached him, bowed slightly, kissed his right hand, and pressed it to their forehead. Even Mehmet, the loud joker, became humble and quiet.</p>
+                <p>In my office in Munich, respect is earned by competence, KPIs, and titles. Here, the uncle didn't need to do anything. His age was his rank. He was the history of the family, and that demanded reverence.</p>
+            </div>
+
+            <div class="media-showcase">
+                <div class="media-item pictogram-box">
+                    <img src="Bilder/hierarchy_of_age.png" alt="Bild - Social Openness">
+                </div>
+            </div>
+
+            <div class="analysis">
+                <div class="comparison-grid">
+                    <div class="col de">
+                        <h3>🇩🇪 Germany</h3>
+                        <ul>
+                            <li>Merit-based authority.</li>
+                            <li>Egalitarian approach to age.</li>
+                        </ul>
+                    </div>
+                    <div class="col tr">
+                        <h3>🇹🇷 Turkey</h3>
+                        <ul>
+                            <li>Seniority-based authority.</li>
+                            <li>Ritualized respect (Hand-kissing, standing up).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="entry">
+            <div class="entry-header">
+                <span class="meta-tag">Day 4 • 22:30 • The Balcony</span>
+                <h2>When the Day Actually Begins</h2>
+            </div>
+            
+            <div class="story-content">
+                <p>We stepped onto the balcony for a smoke. I looked at my watch: 10:30 PM. In Germany, the sidewalks would be rolled up. Curtains closed. The sacred "Ruhezeit" (quiet time) would be in full effect.</p>
+                <p>Here? The street was exploding with life. I saw grandmothers drinking tea on benches. Teenagers on scooters. A group of men playing Backgammon, the dice clattering loudly. Toddlers were running around playing tag.</p>
+                <p>"Don't these people sleep?" I asked. <br>Mehmet laughed. "Sleep is for when you are dead. Now we live." <br>While Germany sleeps to be productive tomorrow, Istanbul stays awake to be connected today.</p>
+            </div>
+
+            <div class="media-showcase">
+                <div class="media-item pictogram-box">
+                    <img src="Bilder/daily_rhythms.png" alt="Bild - Social Openness">
+                </div>
+            </div>
+
+            <div class="analysis">
+                <div class="comparison-grid">
+                    <div class="col de">
+                        <h3>🇩🇪 Germany</h3>
+                        <ul>
+                            <li>Strict work-rest separation.</li>
+                            <li>"Ruhezeit" (Quiet hours) are legally protected.</li>
+                        </ul>
+                    </div>
+                    <div class="col tr">
+                        <h3>🇹🇷 Turkey</h3>
+                        <ul>
+                            <li>Polychronic time.</li>
+                            <li>Social life peaks after sunset.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="entry">
+            <div class="entry-header">
+                <span class="meta-tag">Day 5 • 09:05 AM • The Silence</span>
+                <h2>Silence at 9:05</h2>
+            </div>
+            
+            <div class="story-content">
+                <p>I stayed at Mehmet's place that night. The next morning, we walked towards the ferry. Suddenly, at exactly 9:05 AM, a siren wailed across the Bosphorus. </p>
+                <p>Then, the impossible happened. A city of 16 million people froze. Cars slammed on their brakes in the middle of the bridge. Drivers got out and stood at attention. Pedestrians stopped mid-step. The only sound was the wind and the siren.</p>
+                <p>It was November 10th—the death anniversary of Atatürk. <br>I got goosebumps. Coming from Germany, where patriotism is a quiet, difficult, and often critical topic, this overwhelming, collective wave of emotion was shocking. It wasn't forced; it was felt.</p>
+            </div>
+
+            <div class="media-showcase">
+                <div class="media-item pictogram-box">
+                    <img src="Bilder/national_identity.png" alt="Bild - National Identity">
+                </div>
+                
+                <div class="media-item video-box">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/5X8iYMopPGw?si=H4n2fjgWIpYKlBus" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="analysis">
+                <div class="comparison-grid">
+                    <div class="col de">
+                        <h3>🇩🇪 Germany</h3>
+                        <ul>
+                            <li>Constitutional Patriotism.</li>
+                            <li>Critical/Reserved relationship with symbols.</li>
+                        </ul>
+                    </div>
+                    <div class="col tr">
+                        <h3>🇹🇷 Turkey</h3>
+                        <ul>
+                            <li>Emotional Patriotism.</li>
+                            <li>Collective rituals reinforce national unity.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="entry">
+            <div class="entry-header">
+                <span class="meta-tag">Day 5 • 14:00 • The Tea Garden</span>
+                <h2>Talking Without Saying Everything</h2>
+            </div>
+            
+            <div class="story-content">
+                <p>Before I left for the airport, Mehmet told me about a problem he had with his boss at the textile shop. "I told him that perhaps, if God wills, the new shipment might be difficult to sell if the color isn't quite right," Mehmet said.</p>
+                <p>"Why didn't you just say: 'Boss, you ordered the wrong ugly color'?" I asked.</p>
+                <p>Mehmet looked horrified. "And shame him? No. He understood what I meant." <br>I realized that my German directness—my obsession with "Facts"—would be a bull in a china shop here. In Turkey, truth is wrapped in layers of cotton to protect the relationship. You read the air, not just the words.</p>
+            </div>
+
+            <div class="media-showcase">
+                <div class="media-item pictogram-box">
+                    <img src="Bilder/communication_style.png" alt="Bild - Social Openness">
+                </div>
+            </div>
+
+            <div class="analysis">
+                <div class="comparison-grid">
+                    <div class="col de">
+                        <h3>🇩🇪 Germany (Low Context)</h3>
+                        <ul>
+                            <li>Direct, factual.</li>
+                            <li>Separation of person and problem.</li>
+                        </ul>
+                    </div>
+                    <div class="col tr">
+                        <h3>🇹🇷 Turkey (High Context)</h3>
+                        <ul>
+                            <li>Indirect, metaphorical.</li>
+                            <li>Preserving "Face" and harmony is priority.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="entry">
+            <div class="entry-header">
+                <span class="meta-tag">Day 5 • 16:00 • To the Airport</span>
+                <h2>A Moving Conversation</h2>
+            </div>
+            
+            <div class="story-content">
+                <p>The taxi ride back was the final exam. We were weaving through traffic at high speed. Cars were millimeters apart. To my German eyes, it was anarchy. There were lanes, but no one used them. There were signs, but no one obeyed them.</p>
+                <p>But then I looked closer. It wasn't chaos. It was a high-speed negotiation. Drivers were constantly making eye contact, using small hand gestures, honking not to say "I hate you" but "I am here." <br>In Germany, I trust the traffic light (The System). Here, I had to trust the other driver (The Human). And surprisingly, it worked.</p>
+            </div>
+
+            <div class="media-showcase">
+                <div class="media-item pictogram-box">
+                    <img src="Bilder/traffic_cultures.png" alt="Bild - Social Openness">
+                </div>
+            </div>
+
+            <div class="analysis">
+                <div class="comparison-grid">
+                    <div class="col de">
+                        <h3>🇩🇪 Germany</h3>
+                        <ul>
+                            <li>Rule-Based.</li>
+                            <li>The System is the authority.</li>
+                        </ul>
+                    </div>
+                    <div class="col tr">
+                        <h3>🇹🇷 Turkey</h3>
+                        <ul>
+                            <li>Relationship-Based.</li>
+                            <li>The Driver/Negotiation is the authority.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <div class="narrative-bridge">
+            <p>* * *</p>
+            <p>Back in Germany, the silence of my apartment felt different. It wasn't peaceful anymore; it was just empty. So I picked up my guitar to make sense of the noise, the tea, and the chaos.</p>
+            <p>* * *</p>
+        </div>
+
+        <article class="entry">
+            <div class="entry-header">
+                <span class="meta-tag">Epilogue • The Reflection</span>
+                <h2>The Grid and the Flow</h2>
+            </div>
+            
+            <div class="story-content">
+                <p>Words weren't enough to capture the feeling of the Bosphorus wind or the sound of the dice on the backgammon board. This is my summary – not in a spreadsheet, but in a song.</p>
+            </div>
+
+            <div class="media-showcase">
+                <div class="media-item audio-box">
+                    <audio controls>
+                        <source src="audio/konrads_song.mpeg" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <p class="placeholder-text" style="background: transparent; padding-top: 0;">
+                    🎵 "Letting Go of the Grid" - Written & Performed by Konrad
+                </p>
+            </div>
+        </article>
+
+    </main>
+
+    <footer>
+        <p>Intercultural Communication Project 2025 • Created by Bekir Taha Gede, Elias Ranzurmall and Paul-Gideon Eis</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+For this project, we didn't want the AI to just generate generic content for us; we wanted to treat it as a collaborative team member. To achieve this, we used a strategy based on clear communication and establishing a specific workflow.
+
+1. Setting the Tone
+Instead of using standard prompts, we gave the AI a specific personality right from the start. We asked it to act as an honest, direct advisor rather than a polite assistant. This helped us get straight to the point and receive constructive feedback on our ideas without unnecessary fluff.
+
+2. The "Prototype" Approach for Visuals
+Our most effective strategy was how we created the pictograms. We didn't try to generate all of them at once. Instead, we spent a lot of time refining a single image. We tweaked the prompt and iterated with the AI until we had one "perfect" pictogram that matched our vision. Once we had this prototype, we simply instructed the AI to apply that exact style to the remaining topics. This made the rest of the process incredibly fast and ensured a consistent design language across the site.
+
+3. From Content to Code
+We decided that a simple document wasn't enough to present our blog posts and videos effectively—we needed a functional website. However, instead of coding everything from scratch, we used the AI as our technical developer. We instructed it to create a specific "One-Pager" template that was pre-structured for our content (with placeholders for text and media). This allowed us to focus purely on the creative storytelling, while the AI provided the necessary technical framework to bring it all together.
